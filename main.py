@@ -2,6 +2,7 @@
 import json
 import numpy as np
 import model as m
+import model2 as m2
 
 from flask import Flask,request, jsonify
 import pickle
@@ -42,9 +43,9 @@ def model():
 
     student = {'name':"subhath" , 'age':24}
 
-    first_five_projects = m.func(int(id))
+    first_five_projects = m2.func1(int(id))
     print(first_five_projects)
-    first_five_projects_list = first_five_projects['title'].tolist()
+    first_five_projects_list = first_five_projects['PrjecttId'].tolist()
 
     return first_five_projects_list
 

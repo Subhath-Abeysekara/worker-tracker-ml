@@ -23,14 +23,14 @@ q_projct = df2.copy().loc[df2['vote_count'] >= m]
 print(q_projct.shape)
 
 
-def func(r,q_projct=q_projct):
-    r=r
+def func(q_projct=q_projct):
 
-    def weighted_rating(x, r=r, m=m, C=C):
+
+    def weighted_rating(x,  m=m, C=C):
         v = x['vote_count']
         R = x['vote_average']
         # Calculation based on the IMDB formula
-        return ((v * r*r/ (v-r + m) * R) + (m / (m + v) * C))
+        return ((v / (v + m) * R) + (m / (m + v) * C))
 
     # Define a new feature 'score' and calculate its value with `weighted_rating()`
     q_projct['score'] = q_projct.apply(weighted_rating, axis=1)
@@ -44,13 +44,12 @@ def func(r,q_projct=q_projct):
     # #Print the top 15 movies
     # q_projct[['title', 'vote_count', 'vote_average', 'score']].head(5))
 
-    best_projects = q_projct[['title', 'vote_count', 'vote_average', 'score']].head(5)
+    best_projects = q_projct[['title', 'vote_count', 'vote_average', 'score']].head(10)
 
     print(best_projects)
 
     return best_projects
 
-
-func(4)
+func()
 
 

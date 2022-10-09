@@ -10,8 +10,10 @@ print(df2)
 def func1(m):
     options = {m}
     df3 = df2[df2['Rating'].isin(options)]
+    #df4 = df3['PrjecttId'].value_counts()
+    df4 = df3.groupby(['PrjecttId'])['Rating'].count().reset_index(
+        name='Count').sort_values(['Count'], ascending=False)
+    print(df4.head(5))
+    return df4.head(5)
 
-    df3['count'] = df3.groupby('PrjecttId')['PrjecttId'].transform(pd.Series.value_counts)
-    df3.sort_values('count', ascending=False)
-    print(df3)
 func1(5)
