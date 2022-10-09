@@ -1,6 +1,7 @@
 # This is a sample Python script
 import json
 import numpy as np
+import model as m
 
 from flask import Flask,request, jsonify
 import pickle
@@ -21,6 +22,7 @@ l_list = model.values.tolist()
 print(np_array)
 print(l_list)
 
+
 @app.route("/")
 def main():
     return "hello world"
@@ -39,7 +41,12 @@ def model():
     ]
 
     student = {'name':"subhath" , 'age':24}
-    return projectIds
+
+    first_five_projects = m.func(int(id))
+    print(first_five_projects)
+    first_five_projects_list = first_five_projects['title'].tolist()
+
+    return first_five_projects_list
 
 if __name__ == '__main__':
     app.debug = True
